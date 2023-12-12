@@ -7,14 +7,14 @@ import Input from "../../../components/Input";
 import api_client from "@/config/api_client";
 import { setCookie } from "nookies";
 import { useRouter } from "next/navigation";
-// import AutoComplete from "@/components/AutoComplete";
-// import { useJsApiLoader } from "@react-google-maps/api";
+import { useJsApiLoader } from "@react-google-maps/api";
+import AutoComplete from "@/components/AutoComplete";
 
 export default function AuthPage() {
-  // const { isLoaded, loadError } = useJsApiLoader({
-  //   googleMapsApiKey: process.env.NEXT_GOOGLE_GEOLOCATION_API_KEY as string,
-  //   libraries: ["places"],
-  // });
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_GOOGLE_GEOLOCATION_API_KEY as string,
+    libraries: ["places"],
+  });
   const { push } = useRouter();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState({ address: "", lng: 0, lat: 0 });
@@ -99,7 +99,7 @@ export default function AuthPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          {/* {isLoaded && <AutoComplete setDestiny={setAddress} />} */}
+          {isLoaded && <AutoComplete setDestiny={setAddress} />}
         </div>
         <button
           onClick={() => handleRegister()}
